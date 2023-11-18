@@ -13,14 +13,14 @@ describe('POST /api/users', function () {
         const result = await supertest(web)
             .post('/api/users')
             .send({
-                username: 'masjih',
+                username: 'test',
                 password: 'rahasia456',
-                name: 'Masjih Pratama'
+                name: 'testing bos'
             });
 
         expect(result.status).toBe(200);
-        expect(result.body.data.username).toBe("masjih");
-        expect(result.body.data.name).toBe("Masjih Pratama");
+        expect(result.body.data.username).toBe("test");
+        expect(result.body.data.name).toBe("testing bos");
         expect(result.body.data.password).toBeUndefined();
     });
 
@@ -44,26 +44,26 @@ describe('POST /api/users', function () {
         let result = await supertest(web)
             .post('/api/users')
             .send({
-                username: 'masjih',
+                username: 'test',
                 password: 'rahasia456',
-                name: 'Masjih Pratama'
+                name: 'testing bos'
             });
 
         logger.info(result.body);
 
         // Ensure the registration is successful (status code 200)
         expect(result.status).toBe(200);
-        expect(result.body.data.username).toBe("masjih");
-        expect(result.body.data.name).toBe("Masjih Pratama");
+        expect(result.body.data.username).toBe("test");
+        expect(result.body.data.name).toBe("testing bos");
         expect(result.body.data.password).toBeUndefined();
 
         // Attempt to register the same username again
         result = await supertest(web)
             .post('/api/users')
             .send({
-                username: 'masjih',
+                username: 'test',
                 password: 'rahasia456',
-                name: 'Masjih Pratama'
+                name: 'testing bos'
             });
 
         logger.info(result.body);
