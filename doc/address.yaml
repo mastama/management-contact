@@ -1,0 +1,215 @@
+openapi: 3.0.0
+info:
+  title: Address API Spec
+  version: 1.0.0
+
+paths:
+  /api/contacts/{contactId}/addresses:
+    post:
+      summary: Create Address API
+      parameters:
+        - name: Authorization
+          in: header
+          required: true
+          schema:
+            type: string
+            format: token
+        - name: contactId
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            example:
+              street: Jalan apa
+              city: Kota apa
+              province: Provinsi apa
+              country: Negara apa
+              postal_code: Kode pos
+      responses:
+        '200':
+          description: Successful address creation
+          content:
+            application/json:
+              example:
+                data:
+                  id: 1
+                  street: Jalan apa
+                  city: Kota apa
+                  province: Provinsi apa
+                  country: Negara apa
+                  postal_code: Kode pos
+        '400':
+          description: Error in address creation
+          content:
+            application/json:
+              example:
+                errors: Country is required
+
+  /api/contacts/{contactId}/addresses/{addressId}:
+    put:
+      summary: Update Address API
+      parameters:
+        - name: Authorization
+          in: header
+          required: true
+          schema:
+            type: string
+            format: token
+        - name: contactId
+          in: path
+          required: true
+          schema:
+            type: integer
+        - name: addressId
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            example:
+              street: Jalan apa
+              city: Kota apa
+              province: Provinsi apa
+              country: Negara apa
+              postal_code: Kode pos
+      responses:
+        '200':
+          description: Successful address update
+          content:
+            application/json:
+              example:
+                data:
+                  id: 1
+                  street: Jalan apa
+                  city: Kota apa
+                  province: Provinsi apa
+                  country: Negara apa
+                  postal_code: Kode pos
+        '400':
+          description: Error in address update
+          content:
+            application/json:
+              example:
+                errors: Country is required
+
+    get:
+      summary: Get Address API
+      parameters:
+        - name: Authorization
+          in: header
+          required: true
+          schema:
+            type: string
+            format: token
+        - name: contactId
+          in: path
+          required: true
+          schema:
+            type: integer
+        - name: addressId
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Successful address retrieval
+          content:
+            application/json:
+              example:
+                data:
+                  id: 1
+                  street: Jalan apa
+                  city: Kota apa
+                  province: Provinsi apa
+                  country: Negara apa
+                  postal_code: Kode pos
+        '404':
+          description: Address not found
+          content:
+            application/json:
+              example:
+                errors: contact is not found
+
+  /api/contacts/{contactId}/addresses:
+    get:
+      summary: List Addresses API
+      parameters:
+        - name: Authorization
+          in: header
+          required: true
+          schema:
+            type: string
+            format: token
+        - name: contactId
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Successful list of addresses retrieval
+          content:
+            application/json:
+              example:
+                data:
+                  - id: 1
+                    street: Jalan apa
+                    city: Kota apa
+                    province: Provinsi apa
+                    country: Negara apa
+                    postal_code: Kode pos
+                  - id: 2
+                    street: Jalan apa
+                    city: Kota apa
+                    province: Provinsi apa
+                    country: Negara apa
+                    postal_code: Kode pos
+
+        '404':
+          description: Address not found
+          content:
+            application/json:
+              example:
+                errors: contact is not found
+
+  /api/contacts/{contactId}/addresses/{addressId}:
+    delete:
+      summary: Remove Address API
+      parameters:
+        - name: Authorization
+          in: header
+          required: true
+          schema:
+            type: string
+            format: token
+        - name: contactId
+          in: path
+          required: true
+          schema:
+            type: integer
+        - name: addressId
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Successful address removal
+          content:
+            application/json:
+              example:
+                data: OK
+        '404':
+          description: Address not found
+          content:
+            application/json:
+              example:
+                errors: address is not found

@@ -1,0 +1,202 @@
+openapi: 3.0.0
+info:
+  title: Contact API Spec
+  version: 1.0.0
+
+paths:
+  /api/contacts:
+    post:
+      summary: Create Contact API
+      parameters:
+        - name: Authorization
+          in: header
+          required: true
+          schema:
+            type: string
+            format: token
+      requestBody:
+        required: true
+        content:
+          application/json:
+            example:
+              first_name: Singgih
+              last_name: Pratama
+              email: mastama@teatech.com
+              phone: 32423423434
+      responses:
+        '200':
+          description: Successful contact creation
+          content:
+            application/json:
+              example:
+                data:
+                  id: 1
+                  first_name: Singgih
+                  last_name: Pratana
+                  email: mastama@teatech.com
+                  phone: 32423423434
+        '400':
+          description: Error in contact creation
+          content:
+            application/json:
+              example:
+                errors: Email is not valid format
+
+  /api/contacts/{id}:
+    put:
+      summary: Update Contact API
+      parameters:
+        - name: Authorization
+          in: header
+          required: true
+          schema:
+            type: string
+            format: token
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            example:
+              first_name: Singgih
+              last_name: Pratama
+              email: mastama@teatech.com
+              phone: 32423423434
+      responses:
+        '200':
+          description: Successful contact update
+          content:
+            application/json:
+              example:
+                data:
+                  id: 1
+                  first_name: Singgih
+                  last_name: Pratama
+                  email: mastama@teatech.com
+                  phone: 32423423434
+        '400':
+          description: Error in contact update
+          content:
+            application/json:
+              example:
+                errors: Email is not valid format
+
+    get:
+      summary: Get Contact API
+      parameters:
+        - name: Authorization
+          in: header
+          required: true
+          schema:
+            type: string
+            format: token
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Successful contact retrieval
+          content:
+            application/json:
+              example:
+                data:
+                  id: 1
+                  first_name: Singgih
+                  last_name: Pratama
+                  email: mastama@teatech.com
+                  phone: 32423423434
+        '404':
+          description: Contact not found
+          content:
+            application/json:
+              example:
+                errors: Contact is not found
+
+  /api/contacts:
+    get:
+      summary: Search Contact API
+      parameters:
+        - name: Authorization
+          in: header
+          required: true
+          schema:
+            type: string
+            format: token
+        - name: name
+          in: query
+          schema:
+            type: string
+        - name: email
+          in: query
+          schema:
+            type: string
+        - name: phone
+          in: query
+          schema:
+            type: string
+        - name: page
+          in: query
+          schema:
+            type: integer
+            default: 1
+        - name: size
+          in: query
+          schema:
+            type: integer
+            default: 10
+      responses:
+        '200':
+          description: Successful search results
+          content:
+            application/json:
+              example:
+                data:
+                  - id: 1
+                    first_name: Singgih
+                    last_name: Pratama
+                    email: mastama@teatech.com
+                    phone: 32423423434
+                  - id: 2
+                    first_name: Singgih
+                    last_name: Pratama
+                    email: mastama@teatech.com
+                    phone: 32423423434
+                paging:
+                  page: 1
+                  total_page: 3
+                  total_item: 30
+
+  /api/contacts/{id}:
+    delete:
+      summary: Remove Contact API
+      parameters:
+        - name: Authorization
+          in: header
+          required: true
+          schema:
+            type: string
+            format: token
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Successful contact removal
+          content:
+            application/json:
+              example:
+                data: OK
+        '404':
+          description: Contact not found
+          content:
+            application/json:
+              example:
+                errors: Contact is not found
