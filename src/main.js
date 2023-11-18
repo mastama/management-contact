@@ -1,7 +1,7 @@
 import {web} from "./application/web.js";
 import {logger} from "./application/logging.js";
+const port = 3000
 
-const PORT = '9090'
-web.listen(PORT, () => {
-    logger.info(`App Start on port ${PORT}`);
+web.listen(port, () => {
+    logger.info(`App Start on port ${port}`);
 });

@@ -18,16 +18,24 @@ const register = async (request) => {
     }
 
     //hashing
-    user.password = bcrypt.hash(await user.password, 10);
+    try {
+        user.password = await bcrypt.hash(user.password, 10);
+    } catch (error) {
+        throw new ResponseError(500, "Error hashing password")
+    }
 
     //save to db
-    return prismaClient.user.create({
-        data: user,
-        select: {
-            username: true,
-            name: true
-        }
-    });
+    try {
+        return await prismaClient.user.create({
+            data: user,
+            select: {
+                username: true,
+                name: true
+            }
+        });
+    } catch (error) {
+        throw new ResponseError(500, "Error creating user in the database");
+    }
 }
 
 export default {register}
