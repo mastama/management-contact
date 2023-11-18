@@ -4,7 +4,8 @@
   "description": "management contact nodejs",
   "main": "index.js",
   "scripts": {
-    "test": "jest -i"
+    "test": "jest -i",
+    "start": "node ./src/main.js"
   },
   "jest": {
     "transform": {
